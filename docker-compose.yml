@@ -8,17 +8,25 @@ services:
     volumes:
       - ./:/var/www/html/
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mrrojo_projet
-      MYSQL_USER: etudiant
-      MYSQL_PASSWORD: password
-    ports:
-      - "3306:3306"
+      MYSQL_DATABASE: info_iran
+      MYSQL_USER: neks
+      MYSQL_PASSWORD: neks
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  db_data:
