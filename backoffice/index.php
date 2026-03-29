@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 // Récupérer tous les articles
 try {
-    $stmt = $pdo->query("SELECT * FROM articles ORDER BY created_at DESC");
+    $stmt = $pdo->query("SELECT * FROM articles ORDER BY date_creation DESC");
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error = "Erreur de récupération des articles : " . $e->getMessage();
@@ -64,7 +64,7 @@ try {
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
-                <th>Auteur</th>
+                <th>Slug</th>
                 <th>Date de création</th>
                 <th>Actions</th>
             </tr>
@@ -75,8 +75,8 @@ try {
                     <tr>
                         <td><?= htmlspecialchars($article['id']) ?></td>
                         <td><?= htmlspecialchars($article['titre']) ?></td>
-                        <td><?= htmlspecialchars($article['auteur']) ?></td>
-                        <td><?= htmlspecialchars($article['created_at']) ?></td>
+                        <td><?= htmlspecialchars($article['slug']) ?></td>
+                        <td><?= htmlspecialchars($article['date_creation']) ?></td>
                         <td>
                             <a href="edit_article.php?id=<?= urlencode($article['id']) ?>" class="btn-edit">Modifier</a>
                             <a href="delete_article.php?id=<?= urlencode($article['id']) ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</a>
