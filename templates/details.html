@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#4c0003",
+              "surface-bright": "#faf9fd",
+              "on-secondary-fixed": "#1a1c1e",
+              "surface-container": "#efedf1",
+              "surface": "#faf9fd",
+              "on-tertiary-fixed-variant": "#93000d",
+              "background": "#faf9fd",
+              "on-secondary": "#ffffff",
+              "outline-variant": "#c4c6cf",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#001b3d",
+              "primary-fixed": "#d6e3ff",
+              "surface-variant": "#e3e2e6",
+              "on-tertiary-container": "#ff3d39",
+              "tertiary-fixed": "#ffdad6",
+              "secondary-fixed-dim": "#c6c6c9",
+              "primary-container": "#062143",
+              "on-background": "#1a1b1e",
+              "inverse-primary": "#b1c7f2",
+              "surface-container-high": "#e9e7eb",
+              "on-primary-container": "#7489b1",
+              "secondary-container": "#e2e2e5",
+              "on-tertiary": "#ffffff",
+              "on-secondary-container": "#636467",
+              "on-error-container": "#93000a",
+              "surface-container-highest": "#e3e2e6",
+              "inverse-on-surface": "#f1f0f4",
+              "primary-fixed-dim": "#b1c7f2",
+              "on-primary": "#ffffff",
+              "surface-tint": "#495f84",
+              "secondary": "#5d5e61",
+              "surface-container-lowest": "#ffffff",
+              "on-error": "#ffffff",
+              "tertiary-fixed-dim": "#ffb4ac",
+              "on-surface": "#1a1b1e",
+              "on-primary-fixed-variant": "#31476b",
+              "primary": "#000a1e",
+              "secondary-fixed": "#e2e2e5",
+              "outline": "#74777f",
+              "on-tertiary-fixed": "#410002",
+              "on-surface-variant": "#44474e",
+              "on-secondary-fixed-variant": "#454749",
+              "surface-dim": "#dad9dd",
+              "error": "#ba1a1a",
+              "tertiary": "#210001",
+              "surface-container-low": "#f4f3f7",
+              "inverse-surface": "#2f3033"
+            },
+            fontFamily: {
+              "headline": ["Work Sans"],
+              "body": ["Newsreader"],
+              "label": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for editorial feel */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #495f84; border-radius: 10px; }
+        
+        .article-content p { margin-bottom: 2rem; line-height: 1.75; font-size: 1.125rem; }
+        .article-content h2 { font-family: 'Work Sans'; font-weight: 700; font-size: 1.875rem; margin-top: 3rem; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#faf9fd] dark:bg-slate-950/80 backdrop-blur-md">
+<div class="flex items-center justify-between px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<button class="text-[#002147] dark:text-slate-100 flex items-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-1.5 rounded-sm border-b border-outline-variant/40 focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label ml-2 w-48" placeholder="Rechercher..." type="text"/>
+</div>
+</div>
+<a class="text-3xl font-black tracking-tighter text-[#002147] dark:text-slate-50 font-['Work_Sans']" href="/">The Digital Atelier</a>
+<div class="flex items-center gap-4">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-[#002147] dark:text-white font-bold border-b-2 border-[#002147] font-['Work_Sans'] transition-colors duration-300" href="#">Politics</a>
+<a class="text-[#44474e] dark:text-slate-400 font-medium font-['Work_Sans'] hover:text-[#000a1e] dark:hover:text-white transition-colors duration-300" href="#">Tech</a>
+<a class="text-[#44474e] dark:text-slate-400 font-medium font-['Work_Sans'] hover:text-[#000a1e] dark:hover:text-white transition-colors duration-300" href="#">Culture</a>
+</nav>
+<button class="bg-primary text-on-primary px-5 py-2 text-sm font-label font-bold tracking-tight uppercase hover:opacity-90 transition-opacity">
+                    S'abonner
+                </button>
+</div>
+</div>
+</header>
+<!-- Recent News Ticker -->
+<div class="mt-20 border-y border-outline-variant/10 bg-surface-container-low py-2 overflow-hidden whitespace-nowrap">
+<div class="max-w-screen-2xl mx-auto px-6 flex items-center gap-4">
+<span class="font-label text-[10px] font-extrabold uppercase tracking-widest text-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded-full">En Direct</span>
+<div class="flex gap-12 animate-marquee font-label text-xs font-medium text-on-surface-variant">
+<span>• L'économie mondiale montre des signes de reprise inattendus</span>
+<span>• Nouvelle exposition majeure au Palais de Tokyo ce samedi</span>
+<span>• La technologie quantique franchit une étape décisive à Saclay</span>
+<span>• Festival de Cannes : les premières réactions de la critique</span>
+</div>
+</div>
+</div>
+<main class="max-w-screen-2xl mx-auto px-4 md:px-8 pt-12 md:pt-20">
+<!-- Headline Section -->
+<header class="max-w-4xl mx-auto text-center md:text-left mb-12">
+<div class="flex justify-center md:justify-start gap-2 mb-6">
+<span class="font-label text-xs uppercase tracking-[0.2em] font-bold text-on-primary-fixed-variant">Culture &amp; Société</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label text-xs uppercase tracking-[0.2em] font-medium text-on-surface-variant">12 Mai 2024</span>
+</div>
+<h1 class="font-headline font-black text-4xl md:text-7xl leading-[1.05] tracking-tighter text-primary mb-8 md:-ml-1">
+                L'Éveil de l'Atelier Numérique : Redéfinir l'Esthétique de l'Information.
+            </h1>
+<p class="font-body italic text-xl md:text-2xl text-on-surface-variant leading-relaxed max-w-2xl">
+                Comment la convergence du design minimaliste et de la narration profonde transforme notre perception du quotidien numérique.
+            </p>
+<div class="mt-8 flex items-center justify-center md:justify-start gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="Author" data-alt="professional portrait of a man with spectacles in a bright modern studio setting with neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsB70M_iUWGeQ_DMtIJFCSyS1RzGnuYz2U6AFYdQKDlb5VaLdX6X-DpQJyYbmjB3Qxpt1JU75K-MHk3GGOetPRKgZ0-xIUFsymNan4wal5CzwCMD__KGnbANKj-DjpVnmQwUMRlENxuuu7qv3jRFXcFfNjNeipKBregXcrdH7kF_5BJnT6OMwWX9rbRrATKfkKgUb1qwYFZXXYSuRHqrQg1MXHKYTuQ8wZeVrHmZLulu3ABwWg1aLIbvw1ssZnoaJBniuopOOJ8Y-j"/>
+</div>
+<div class="text-left">
+<p class="font-label text-sm font-bold text-primary">Par Julian de Beaumont</p>
+<p class="font-label text-xs text-on-surface-variant">Éditeur Culturel Principal</p>
+</div>
+</div>
+</header>
+<!-- Hero Image -->
+<section class="mb-16 md:mb-24 relative">
+<div class="aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="overhead view of a minimalist workspace with a vintage typewriter, modern tablet, and a single branch of eucalyptus in a glass vase on a white marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDus5wpqKk0ugZ98CPS3R0UIHluWjZAqOlD0aoenp6Z93xGRiW7WQ1HJLatdY0n-E6rEZOLjJTqbEAT-be9a2qdguVe-4K04c2M9JRrrJjTsZtypE66xYeVXmVWz2kxyTfQV8mUewvimnlyJLjcI4_bVumZWZFy7MSMqHm883luOwZqe4z4s2NMaHdNst1aS9sWSvWh4ACwpisrnZwCVZ5NTqoiw5X3_HXFtEknkzxtHe1Atr3QSm3HX9H1VzWedf5wxopDMHlBVsOo"/>
+</div>
+<div class="mt-4 text-right max-w-4xl mx-auto px-4">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60">Photo par Atelier Visuals / Getty Images</span>
+</div>
+</section>
+<!-- Article Content Shell -->
+<div class="flex flex-col lg:flex-row gap-16 max-w-screen-xl mx-auto">
+<!-- Main Content Area -->
+<article class="w-full lg:w-2/3 article-content text-on-surface font-body">
+<p class="text-2xl leading-relaxed first-letter:text-7xl first-letter:font-headline first-letter:font-black first-letter:mr-3 first-letter:float-left first-letter:text-primary">
+                    Dans un monde saturé de notifications éphémères et de flux d'informations incessants, la quête de sens devient un acte de résistance. L'Atelier Numérique n'est pas seulement une plateforme, c'est une philosophie de la clarté. En privilégiant le silence visuel, nous permettons aux idées de résonner avec une intensité renouvelée.
+                </p>
+<p>
+                    Le design, souvent perçu comme un simple ornement, est en réalité le squelette de notre compréhension. Lorsque nous supprimons le superflu—les bordures agressives, les ombres portées lourdes, les animations distrayantes—ce qui reste est l'essence pure du message. C'est ici que la typographie prend tout son sens, agissant comme le timbre de voix d'un narrateur invisible.
+                </p>
+<blockquote class="my-12 py-8 border-y border-outline-variant/20 text-3xl md:text-4xl italic font-light text-primary-container text-center px-4 md:px-12 leading-tight">
+                    "La véritable élégance n'est pas de se faire remarquer, mais d'être mémorisé par la justesse de son propos."
+                </blockquote>
+<h2>L'Architecture du Vide</h2>
+<p>
+                    L'espace blanc n'est pas un manque de contenu, c'est un choix délibéré de respiration. Dans nos mises en page asymétriques, nous guidons l'œil non pas par la contrainte, mais par la suggestion. En plaçant une image légèrement en dehors de l'alignement traditionnel, nous créons un rythme organique, proche de celui d'un magazine d'art physique.
+                </p>
+<div class="my-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-low p-2">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="close up of architectural details with sharp shadows and geometric shapes in high contrast black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvZmxnIbdTjEiB5O-NBcu7Ijy4hCWJ5Ln3i1GNfBeY5ymuw6OtcVv5UmjeDf6ZHAwI1Y43gwRJwNyVMjXPV455KR4IlPLxsbyTdQp6hQmweCNEnaKWUJlv2VN_wuoNvGxmDkjcr8MbiyPp41hDHusHYOqti818fAaOOgmP5JHDyQeFCiStGN_uXZY4M-A-F-xGnR3GdursEkMAn5vMRWsYD0qnw3ISzO8GdJt5ZmDcHZll1MxYbhUdjdXdmOrQ3LqnNHZ7Hhmwf3Gj"/>
+<p class="font-label text-[10px] mt-2 text-on-surface-variant uppercase tracking-tighter">Étude de forme : L'ombre et la lumière.</p>
+</div>
+<div class="bg-surface-container-low p-2 mt-8 md:mt-16">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="modern minimalist interior with neutral beige walls and a single designer chair casting a long soft shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS4ziTD59kg6rQSiN2eRY7fuBNJr6WFBSQcySN_3_fTAMZdgJKucrYou2iw_yfyjssDd-6lByFEKNOppnuZDJgMpSkp9xkMaWy7uugisEiywk3sZ8cUxslL-bg7VGiLlq3y4w9zZejw99DJZ82dQUMuHc8C-hKGzuI5Ft4ogTeJeTH_XDHyFjkKZS6upQt0HQ5d_pS5bC0uaNI-A2LFKsOEbVEOjm7dbub3C_GvipBIT1POh2ezsD6kLHSxRPDeIQu3ez8PzFPFg7Q"/>
+<p class="font-label text-[10px] mt-2 text-on-surface-variant uppercase tracking-tighter">Espace : La respiration nécessaire.</p>
+</div>
+</div>
+<p>
+                    Cette approche transforme la lecture d'un simple acte de consommation en une expérience immersive. Nous ne lisons plus seulement pour savoir ; nous lisons pour ressentir. La chaleur du papier numérique, simulée par des teintes de surface subtilement teintées comme notre 'surface-container-low', adoucit l'agression de l'écran.
+                </p>
+<div class="mt-20 flex flex-wrap gap-2">
+<span class="px-4 py-1 bg-surface-container-high rounded-full font-label text-xs text-on-surface-variant font-medium">Esthétique</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full font-label text-xs text-on-surface-variant font-medium">Design System</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full font-label text-xs text-on-surface-variant font-medium">Philosophie Numérique</span>
+</div>
+</article>
+<!-- Sidebar / Related Articles -->
+<aside class="w-full lg:w-1/3">
+<div class="sticky top-28 space-y-12">
+<div>
+<h3 class="font-headline font-bold text-xs uppercase tracking-[0.3em] text-primary mb-8 border-b border-primary/10 pb-2">Articles Connexes</h3>
+<div class="space-y-10">
+<!-- Related Card -->
+<div class="group cursor-pointer">
+<div class="aspect-video mb-4 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="minimalist art gallery interior with white walls and focused lighting on a single abstract sculpture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeJ4TPzfY5L6TA9KtqSgZkEuP8Sm9QJ5GToZrYwI-HxGk8Xlf9PN_jDbYH4KshDMn0IwHuQI9xCnEZ-o98vDdkYnJzHpvs13yj9EjtaCdGnSa5DWIr2JDTKT3yP9qfcBzpSTuwZ5PXygKvFWtubwgnfI5VAHRJF_K6h1_TRwtk_NgeqgZMAnRHcvJajSEm1lf71qkDc551oWsV7C7wYJvgx5eqluRuvCr4l3-9Gmdf5P8wmqYZTwdfWotXb_91jQu36SJ6iSwMWMr7"/>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-tertiary-container font-bold mb-2 block">Arts Visuels</span>
+<h4 class="font-headline font-bold text-lg leading-snug group-hover:text-primary-container transition-colors">Le Minimalisme dans l'Art Contemporain : Moins c'est Plus.</h4>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-video mb-4 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="modern living room with soft natural light streaming through large windows and a few carefully curated decorative objects" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdWpqi5rx1DMK94StGPZwE2HJLIMwPRL_cyWb2vECF2p4Y0vIm8kSQADJdIaWPMS9MA6j_cHaI25LeXtIXy0hXmlTdfCvF-18xXghrbSizYwilsl6745vNDMZAWs-5UuwL6MCnViwlvccY9FFM6ePF7YVPoisOdPG5ZwHAvtgbgEndLu-k_BZYGqMt6sCFfHlh7p7v_5cVC-SViw18gBdrhwrWp54xWPK2rGL_LZBM7VyosQx-_B4bq2AO6mXuk8_j__i6M09h4T0w"/>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-tertiary-container font-bold mb-2 block">Design Intérieur</span>
+<h4 class="font-headline font-bold text-lg leading-snug group-hover:text-primary-container transition-colors">Habiter le Vide : Redéfinir nos Espaces de Vie.</h4>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-video mb-4 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="abstract gradient background with soft transitions between deep indigo and warm ochre colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChAmwEx6-tGCAcg61rDf65-RSMZlAkNXdGg_EkqZwEUVUwNUwlFHkZM6-gF8q49NE1Bvv3Na-jT4IvrBUiVHyuzF_LqaJlcbQewb_13nn353cMRcp-1LNusOcC5LJ47i__kZ_umyvh7kYhnif6vJ-wH7zY6EtUtzgFfjNKH-q6BqlTWLCQypGzxFLzbv-2JK-fav9Om4lwpbiSc7UcbOz9NB9_H_g_GuR0LRWvJp6zeoqiL6OTcYI8wLas86BFBie_KqyHZNY9WPhX"/>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-tertiary-container font-bold mb-2 block">Technologie</span>
+<h4 class="font-headline font-bold text-lg leading-snug group-hover:text-primary-container transition-colors">Interface Invisible : L'Avenir de l'Interaction Humaine.</h4>
+</div>
+</div>
+</div>
+<!-- Newsletter Sign Up -->
+<div class="bg-primary-container p-8 text-on-primary">
+<h3 class="font-headline font-black text-2xl tracking-tighter mb-4 text-white">L'Atelier Hebdomadaire</h3>
+<p class="font-body italic text-on-primary-container mb-6">Recevez notre sélection de récits et d'analyses directement dans votre boîte de réception.</p>
+<input class="w-full bg-transparent border-b border-on-primary-container/40 py-2 font-label text-sm focus:border-white focus:ring-0 mb-4 text-white" placeholder="votre@email.com" type="email"/>
+<button class="w-full bg-white text-primary font-label font-black uppercase tracking-widest py-3 text-xs hover:bg-on-primary-container transition-colors">Rejoindre</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-[#f4f3f7] dark:bg-slate-950 no-border tonal-shift">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center">
+<div class="mb-8 md:mb-0">
+<span class="font-['Work_Sans'] font-black text-[#002147] text-2xl">The Digital Atelier</span>
+<p class="font-['Newsreader'] italic text-lg text-[#44474e] dark:text-slate-500 mt-2">Le journal des temps modernes.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-center">
+<nav class="flex gap-6">
+<a class="font-['Newsreader'] italic text-lg text-[#44474e] dark:text-slate-500 hover:text-[#002147] dark:hover:text-slate-200 transition-colors duration-300 opacity-80 hover:opacity-100 underline decoration-1" href="#">About</a>
+<a class="font-['Newsreader'] italic text-lg text-[#44474e] dark:text-slate-500 hover:text-[#002147] dark:hover:text-slate-200 transition-colors duration-300 opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="font-['Newsreader'] italic text-lg text-[#44474e] dark:text-slate-500 hover:text-[#002147] dark:hover:text-slate-200 transition-colors duration-300 opacity-80 hover:opacity-100" href="#">Archive</a>
+<a class="font-['Newsreader'] italic text-lg text-[#44474e] dark:text-slate-500 hover:text-[#002147] dark:hover:text-slate-200 transition-colors duration-300 opacity-80 hover:opacity-100" href="#">Subscribe</a>
+</nav>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 pb-8 text-center md:text-left">
+<p class="font-label text-[10px] uppercase tracking-widest text-[#44474e] dark:text-slate-500">
+                © 2024 The Digital Atelier. All rights reserved. Conçu avec intention.
+            </p>
+</div>
+</footer>
+</body></html>

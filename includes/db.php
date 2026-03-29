@@ -1,8 +1,8 @@
 <?php
-$host = 'db'; 
+$host = 'localhost'; 
 $dbname = 'info_iran';
-$user = 'neks';
-$pass = 'neks';
+$user = 'root';
+$pass = '';
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
