@@ -1,0 +1,10 @@
+# Docker data (très important pour ne pas versionner la BDD locale)
+db_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs & Temp
+*.log
+.vscode/
