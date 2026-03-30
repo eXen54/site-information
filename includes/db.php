@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; 
+$host = 'db'; // Utiliser le nom du service Docker au lieu de 'localhost'
 $dbname = 'info_iran';
-$user = 'root';
-$pass = '';
+$user = 'neks';
+$pass = 'neks'; // Mot de passe défini dans docker-compose.yml
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
