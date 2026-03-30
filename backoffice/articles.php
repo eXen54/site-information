@@ -20,29 +20,136 @@ try {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Articles - BackOffice</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 1000px; margin: 0 auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
-        .nav-links a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
-        .nav-links a:hover { text-decoration: underline; color: #0056b3; }
-        .btn-logout { background-color: #dc3545; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; }
-        .btn-logout:hover { background-color: #c82333; }
-        .btn-add { background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-bottom: 15px; }
-        .btn-add:hover { background-color: #218838; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        table, th, td { border: 1px solid #ddd; }
-        th, td { padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn-view { background-color: #17a2b8; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 5px; }
-        .btn-view:hover { background-color: #138496; }
-        .btn-edit { background-color: #ffc107; color: black; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 5px; }
-        .btn-edit:hover { background-color: #e0a800; }
-        .btn-delete { background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 14px; }
-        .btn-delete:hover { background-color: #c82333; }
-        .alert { padding: 10px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 15px; }
-        .success { padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 15px; }
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --success-hover: #059669;
+            --danger: #ef4444;
+            --danger-hover: #dc2626;
+            --warning: #f59e0b;
+            --warning-hover: #d97706;
+            --info: #3b82f6;
+            --info-hover: #2563eb;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            margin: 0; 
+            padding: 40px 20px; 
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            max-width: 1100px; 
+            margin: 0 auto; 
+        }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--border-color); 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .nav-links a { 
+            margin-right: 15px; 
+            text-decoration: none; 
+            color: var(--primary); 
+            font-weight: 500; 
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary-hover); }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.95rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.1s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:active { transform: translateY(1px); }
+        .btn-logout { background-color: var(--danger); color: white; }
+        .btn-logout:hover { background-color: var(--danger-hover); }
+        .btn-add { background-color: var(--success); color: white; margin-bottom: 20px; font-size: 1rem; padding: 10px 20px;}
+        .btn-add:hover { background-color: var(--success-hover); }
+        
+        .btn-view { background-color: var(--info); color: white; padding: 6px 12px;}
+        .btn-view:hover { background-color: var(--info-hover); }
+        .btn-edit { background-color: #fce83a; color: #92400e; padding: 6px 12px; font-weight: 600; }
+        .btn-edit:hover { background-color: #fde047; }
+        .btn-delete { background-color: var(--danger); color: white; padding: 6px 12px; }
+        .btn-delete:hover { background-color: var(--danger-hover); }
+
+        .table-container {
+            overflow-x: auto;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 10px; 
+        }
+        th, td { 
+            padding: 12px 16px; 
+            text-align: left; 
+            border-bottom: 1px solid var(--border-color);
+        }
+        th { 
+            background-color: #f9fafb; 
+            font-weight: 600; 
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: #f9fafb; }
+        .alert, .success { 
+            padding: 12px 16px; 
+            border-radius: 6px; 
+            margin-bottom: 20px; 
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .alert { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .success { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        
+        .actions-cell {
+            display: flex;
+            gap: 8px;
+        }
     </style>
 </head>
 <body>
@@ -50,13 +157,9 @@ try {
 <div class="container">
     <div class="header">
         <h1>Gestion des Articles</h1>
-        <div class="nav-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="articles.php">Gérer les Articles</a>
-        </div>
-        <div>
+        <div class="user-menu">
             <span>Bienvenue, <strong><?= htmlspecialchars($_SESSION['admin_username'] ?? 'Admin') ?></strong></span>
-            <a href="logout.php" class="btn-logout" style="margin-left: 15px;">Se déconnecter</a>
+            <a href="logout.php" class="btn btn-logout">Se déconnecter</a>
         </div>
     </div>
 
@@ -71,41 +174,43 @@ try {
         <div class="success">Article enregistré avec succès.</div>
     <?php endif; ?>
 
-    <a href="article-form.php" class="btn-add">+ Ajouter un Article</a>
+    <a href="article-form.php" class="btn btn-add">+ Ajouter un Article</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Titre</th>
-                <th>Slug</th>
-                <th>Date de création</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($articles)): ?>
-                <?php foreach ($articles as $article): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($article['id']) ?></td>
-                        <td><?= htmlspecialchars($article['titre']) ?></td>
-                        <td><?= htmlspecialchars($article['slug']) ?></td>
-                        <td><?= htmlspecialchars($article['date_creation']) ?></td>
-                        <td>
-                            <!-- Lien vers FrontOffice, assumant le RewriteRule ou l'accès direct via ID -->
-                            <a href="../articles/<?= urlencode($article['id']) ?>" target="_blank" class="btn-view">Voir</a>
-                            <a href="article-form.php?id=<?= urlencode($article['id']) ?>" class="btn-edit">Modifier</a>
-                            <a href="delete-article.php?id=<?= urlencode($article['id']) ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ? Cette action est irréversible.');">Supprimer</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+    <div class="table-container">
+        <table>
+            <thead>
                 <tr>
-                    <td colspan="5" style="text-align: center;">Aucun article trouvé.</td>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Slug</th>
+                    <th>Date de création</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php if (!empty($articles)): ?>
+                    <?php foreach ($articles as $article): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($article['id']) ?></td>
+                            <td><?= htmlspecialchars($article['titre']) ?></td>
+                            <td><?= htmlspecialchars($article['slug']) ?></td>
+                            <td><?= htmlspecialchars($article['date_creation']) ?></td>
+                            <td class="actions-cell">
+                                <!-- Lien vers la page de prévisualisation du BackOffice -->
+                                <a href="preview.php?id=<?= urlencode($article['id']) ?>" target="_blank" class="btn btn-view">Voir</a>
+                                <a href="article-form.php?id=<?= urlencode($article['id']) ?>" class="btn btn-edit">Modifier</a>
+                                <a href="delete-article.php?id=<?= urlencode($article['id']) ?>" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted);">Aucun article trouvé.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

@@ -159,7 +159,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $id ? 'Éditer' : 'Ajouter' ?> un Article - BackOffice</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- TinyMCE CDN -->
     <script src="https://cdn.tiny.cloud/1/htz1hvla7mvoncok3m65vu9aqi79oxn50518tcs1vxlmzyu3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
@@ -172,19 +175,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       });
     </script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
-        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; }
-        h1 { margin-top: 0; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
-        .form-group input[type="text"], .form-group input[type="file"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .form-group img { max-width: 200px; margin-top: 10px; display: block; }
-        .btn-submit { background-color: #28a745; color: white; border: none; padding: 10px 20px; text-decoration: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        .btn-submit:hover { background-color: #218838; }
-        .btn-cancel { background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-left: 10px; }
-        .btn-cancel:hover { background-color: #5a6268; }
-        .alert { padding: 10px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 15px; }
-        .info { font-size: 13px; color: #666; margin-top: 5px; }
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --success-hover: #059669;
+            --secondary: #6b7280;
+            --secondary-hover: #4b5563;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #d1d5db;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            margin: 0; 
+            padding: 40px 20px; 
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+        h1 { 
+            margin-top: 0; 
+            margin-bottom: 30px;
+            font-size: 1.75rem;
+            color: var(--text-main);
+            font-weight: 600;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 15px;
+        }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { 
+            display: block; 
+            font-weight: 500; 
+            margin-bottom: 8px; 
+            color: #374151;
+            font-size: 0.95rem;
+        }
+        .form-group input[type="text"], .form-group input[type="file"], .form-group textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 6px; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input[type="text"]:focus, .form-group input[type="file"]:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .form-group img { 
+            max-width: 250px; 
+            margin-top: 15px; 
+            display: block; 
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        .btn-submit { 
+            background-color: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover { background-color: var(--primary-hover); }
+        .btn-cancel { 
+            background-color: var(--secondary); 
+            color: white; 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            display: inline-block; 
+            margin-left: 12px; 
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .btn-cancel:hover { background-color: var(--secondary-hover); }
+        .alert { 
+            padding: 16px; 
+            background-color: #fef2f2; 
+            color: #991b1b; 
+            border: 1px solid #fecaca; 
+            border-radius: 6px; 
+            margin-bottom: 24px; 
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .info { 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            margin-top: 6px; 
+        }
     </style>
 </head>
 <body>
