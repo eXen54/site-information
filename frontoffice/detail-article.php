@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 
-$articleSlug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_STRING);
+$articleSlug = trim($_GET['slug'] ?? '');
 if (!$articleSlug || !preg_match('/^[a-z0-9-]+$/', $articleSlug)) {
     http_response_code(400);
     echo 'Identifiant d\'article invalide.';
@@ -21,9 +21,10 @@ $title = $article['titre'];
 $metaDescription = trim((string) $article['meta_description']) !== ''
     ? $article['meta_description']
     : mb_substr(trim(strip_tags((string) $article['contenu'])), 0, 155);
-$heroImage = trim((string) $article['image_url']) !== ''
-    ? $article['image_url']
-    : 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80';
+$heroImage = 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80';
+if (trim((string) $article['image_url']) !== '') {
+    $heroImage = strpos($article['image_url'], 'http') === 0 ? $article['image_url'] : '/' . ltrim($article['image_url'], '/');
+}
 $heroAlt = trim((string) $article['image_alt']) !== ''
     ? $article['image_alt']
     : 'Illustration de l\'article';
@@ -32,7 +33,7 @@ $publishedAt = formatArticleDate((string) $article['date_creation']);
 
 $protocol = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$canonicalUrl = $protocol . '://' . $host . '/site-information/articles/' . $article['slug'];
+$canonicalUrl = $protocol . '://' . $host . '/articles/' . $article['slug'];
 ?>
 <!DOCTYPE html>
 <html class="light" lang="fr">
@@ -125,7 +126,7 @@ $canonicalUrl = $protocol . '://' . $host . '/site-information/articles/' . $art
 <header class="border-b border-line bg-white/90 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
         <a class="text-2xl md:text-3xl font-black tracking-tight text-primary font-headline" href="/">Info Iran</a>
-        <a class="text-sm font-semibold text-primary border border-primary px-3 py-1.5 hover:bg-primary hover:text-white transition-colors" href="/site-information/backoffice/login.php">Backoffice</a>
+        <a class="text-sm font-semibold text-white bg-primary px-4 py-2 rounded shadow-sm hover:bg-opacity-90 transition-colors" href="/backoffice/login.php">Connexion</a>
     </div>
 </header>
 

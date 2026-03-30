@@ -197,7 +197,7 @@ try {
                             <td><?= htmlspecialchars($article['date_creation']) ?></td>
                             <td class="actions-cell">
                                 <!-- Lien vers la page de prévisualisation du BackOffice -->
-                                <a href="preview.php?id=<?= urlencode($article['id']) ?>" target="_blank" class="btn btn-view">Voir</a>
+                                <a href="preview.php?id=<?= urlencode($article['id']) ?>" class="btn btn-view">Voir</a>
                                 <a href="article-form.php?id=<?= urlencode($article['id']) ?>" class="btn btn-edit">Modifier</a>
                                 <a href="delete-article.php?id=<?= urlencode($article['id']) ?>" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</a>
                             </td>

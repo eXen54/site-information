@@ -135,6 +135,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <button type="submit">Se connecter</button>
     </form>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;">&larr; Retour au site</a>
+    </div>
 </div>
 
 </body>
