@@ -8,3 +8,5 @@ Thumbs.db
 # Logs & Temp
 *.log
 .vscode/
+
+includes/db.php
