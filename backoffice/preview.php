@@ -34,12 +34,10 @@ $title = $article['titre'];
 $metaDescription = trim((string) $article['meta_description']) !== ''
     ? $article['meta_description']
     : mb_substr(trim(strip_tags((string) $article['contenu'])), 0, 155);        
-$heroImage = trim((string) $article['image_url']) !== ''
-    ? '../' . $article['image_url']
-    : 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80';
-// Gestion du chemin de l'image : si c'est une URL http, on la garde, sinon on préfixe avec ../ pour sortir du dossier backoffice
+$heroImage = 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80';
+// Gestion du chemin de l'image : si c'est une URL http, on la garde, sinon on utilise le chemin absolu à la racine
 if (trim((string) $article['image_url']) !== '') {
-    $heroImage = strpos($article['image_url'], 'http') === 0 ? $article['image_url'] : '../' . $article['image_url'];
+    $heroImage = strpos($article['image_url'], 'http') === 0 ? $article['image_url'] : '/' . ltrim($article['image_url'], '/');
 }
 
 $heroAlt = trim((string) $article['image_alt']) !== ''
