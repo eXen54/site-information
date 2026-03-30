@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS info_iran;
 CREATE DATABASE IF NOT EXISTS info_iran;
 USE info_iran;
 
