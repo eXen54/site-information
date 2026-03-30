@@ -1,5 +1,4 @@
 <?php
-// Redirection temporaire vers le backoffice
-header('Location: backoffice/login.php');
+header('Location: guerre-iran-actualites');
 exit;
 ?>

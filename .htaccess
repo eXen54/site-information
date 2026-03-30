@@ -6,6 +6,11 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Hardcoded SEO mapping: article slug -> numeric article path.
-RewriteRule ^origines-conflit/?$ frontoffice/detail-article.php?id=1 [L,QSA,NC]
+# Articles list page with SEO slug.
+RewriteRule ^guerre-iran-actualites/?$ frontoffice/articles-list.php [L,QSA,NC]
+
+# Article detail page: articles/[slug] where slug is a-z, 0-9, hyphens.
+RewriteRule ^articles/([a-z0-9-]+)/?$ frontoffice/detail-article.php?slug=$1 [L,QSA,NC]
+
+
 

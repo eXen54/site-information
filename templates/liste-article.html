@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Digital Atelier | The Modern Archivist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&amp;family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#ffb4ac",
+              "on-secondary": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dad9dd",
+              "on-secondary-container": "#636467",
+              "primary-container": "#062143",
+              "on-primary": "#ffffff",
+              "on-background": "#1a1b1e",
+              "on-tertiary-fixed": "#410002",
+              "on-primary-fixed": "#001b3d",
+              "primary-fixed-dim": "#b1c7f2",
+              "surface-container-low": "#f4f3f7",
+              "surface-bright": "#faf9fd",
+              "primary": "#000a1e",
+              "on-primary-fixed-variant": "#31476b",
+              "error": "#ba1a1a",
+              "primary-fixed": "#d6e3ff",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#ff3d39",
+              "secondary-container": "#e2e2e5",
+              "outline-variant": "#c4c6cf",
+              "surface-container-highest": "#e3e2e6",
+              "on-tertiary-fixed-variant": "#93000d",
+              "tertiary-fixed": "#ffdad6",
+              "surface-container": "#efedf1",
+              "on-secondary-fixed-variant": "#454749",
+              "inverse-surface": "#2f3033",
+              "inverse-on-surface": "#f1f0f4",
+              "background": "#faf9fd",
+              "surface-container-high": "#e9e7eb",
+              "secondary": "#5d5e61",
+              "on-surface": "#1a1b1e",
+              "tertiary": "#210001",
+              "surface": "#faf9fd",
+              "surface-tint": "#495f84",
+              "secondary-fixed": "#e2e2e5",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#b1c7f2",
+              "outline": "#74777f",
+              "tertiary-container": "#4c0003",
+              "on-secondary-fixed": "#1a1c1e",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c6c6c9",
+              "on-surface-variant": "#44474e",
+              "on-primary-container": "#7489b1",
+              "surface-variant": "#e3e2e6"
+            },
+            fontFamily: {
+              "headline": ["Work Sans"],
+              "body": ["Newsreader"],
+              "label": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9fd;
+            color: #1a1b1e;
+            font-family: 'Newsreader', serif;
+        }
+        /* Hide scrollbar for category filter but allow scrolling */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 bg-[#faf9fd] dark:bg-slate-950/80 backdrop-blur-md">
+<div class="flex items-center justify-between px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-[#002147] dark:text-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+<h1 class="text-3xl font-black tracking-tighter text-[#002147] dark:text-slate-50 font-headline">
+                The Digital Atelier
+            </h1>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-[#002147] dark:text-white font-bold border-b-2 border-[#002147] font-headline text-sm tracking-tight transition-colors duration-300" href="#">Politics</a>
+<a class="text-[#44474e] dark:text-slate-400 font-medium font-headline text-sm tracking-tight hover:text-[#000a1e] dark:hover:text-white transition-colors duration-300" href="#">Tech</a>
+<a class="text-[#44474e] dark:text-slate-400 font-medium font-headline text-sm tracking-tight hover:text-[#000a1e] dark:hover:text-white transition-colors duration-300" href="#">Sports</a>
+<a class="text-[#44474e] dark:text-slate-400 font-medium font-headline text-sm tracking-tight hover:text-[#000a1e] dark:hover:text-white transition-colors duration-300" href="#">Culture</a>
+</nav>
+<button class="text-[#002147] dark:text-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-20">
+<!-- Search and Global Header Section -->
+<section class="max-w-7xl mx-auto px-6 mb-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8 py-8">
+<div class="w-full md:w-2/3">
+<h2 class="font-headline font-black text-5xl md:text-7xl text-primary tracking-tighter leading-none mb-6">
+                        Curating the <br/>Contemporary.
+                    </h2>
+<div class="relative max-w-xl group">
+<span class="absolute left-0 bottom-3 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</span>
+<input class="w-full bg-transparent border-none border-b border-outline-variant/40 focus:border-primary focus:ring-0 py-3 pl-8 font-headline text-xl transition-all duration-300 outline-none" placeholder="Search the archive..." type="text"/>
+</div>
+</div>
+<div class="hidden md:block w-1/4 text-right">
+<p class="font-body italic text-on-surface-variant text-lg leading-relaxed">
+                        "The archive is not a quiet place of storage, but a vibrant theater of memory and intent."
+                    </p>
+</div>
+</div>
+</section>
+<!-- Category Filter (NavigationDrawer labels mapped here) -->
+<section class="max-w-7xl mx-auto px-6 mb-16 overflow-x-auto no-scrollbar">
+<div class="flex gap-4 items-center">
+<span class="font-headline font-bold uppercase tracking-widest text-[10px] text-on-surface-variant mr-4">Filter By</span>
+<button class="px-6 py-2 bg-[#002147] text-white rounded-sm font-headline uppercase tracking-widest text-xs transition-all duration-200">Politics</button>
+<button class="px-6 py-2 text-[#44474e] hover:bg-surface-container-low rounded-sm font-headline uppercase tracking-widest text-xs transition-all duration-200">Tech</button>
+<button class="px-6 py-2 text-[#44474e] hover:bg-surface-container-low rounded-sm font-headline uppercase tracking-widest text-xs transition-all duration-200">Sports</button>
+<button class="px-6 py-2 text-[#44474e] hover:bg-surface-container-low rounded-sm font-headline uppercase tracking-widest text-xs transition-all duration-200">Culture</button>
+<button class="px-6 py-2 text-[#44474e] hover:bg-surface-container-low rounded-sm font-headline uppercase tracking-widest text-xs transition-all duration-200">Economy</button>
+</div>
+</section>
+<!-- Featured Article (Asymmetrical Layout) -->
+<section class="max-w-7xl mx-auto px-6 mb-24">
+<div class="relative grid grid-cols-1 md:grid-cols-12 gap-0 group">
+<div class="md:col-span-8 overflow-hidden">
+<img class="w-full aspect-[16/9] object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="A cinematic low angle shot of a brutalist concrete building against a stark blue sky with sharp geometric shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFfOeDr_pPkazrreFjxt_OO5E2LKi3EBGXHhAAB34l_UQrgJTtn0nziFPNNKpwwQ7hra0VYSX-H-CcYkv1olKB6D1b_LrEF5RBkcFRFABssNj59DuYiI25Fc2CMYXJCvDz7ys10zqpYn7ozUcSjcejcxhS1vPxp8o-5q6KSPgMOuUQfRcdSPVzCxnHzVfNUdMqRi9yhSHsBT_nvIJFPRygNfnvrsQvAET1PRiWwq79I1WF_QkSFfFs5RlPLsHg68IA3z3O_wU2npDU"/>
+</div>
+<div class="md:col-span-6 md:absolute md:right-0 md:bottom-[-2rem] bg-surface-container-lowest p-8 md:p-12 shadow-2xl shadow-primary/5 z-10 md:ml-[-10%]">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full font-headline font-bold text-[10px] uppercase tracking-tighter">Politics</span>
+<span class="font-headline text-[10px] text-on-surface-variant font-medium uppercase tracking-widest">October 24, 2024</span>
+</div>
+<h3 class="font-headline font-black text-3xl md:text-5xl text-primary tracking-tighter leading-[0.9] mb-6">
+                        The Architecture of Power in the Digital Age
+                    </h3>
+<p class="font-body text-xl text-on-surface-variant leading-relaxed mb-8">
+                        As silicon valleys become sovereign states, the physical world begins to reflect the rigid, invisible logic of the network. A deep dive into the new brutalism.
+                    </p>
+<a class="inline-flex items-center gap-2 group/link" href="#">
+<span class="font-headline font-bold text-sm uppercase tracking-widest text-primary">Read Full Dossier</span>
+<span class="material-symbols-outlined text-primary group-hover/link:translate-x-1 transition-transform" data-icon="arrow_right_alt">arrow_right_alt</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Article Feed Grid (No Borders, Spacing-Based Separation) -->
+<section class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-20">
+<!-- Article 1 -->
+<article class="flex flex-col gap-6">
+<div class="overflow-hidden">
+<img class="w-full aspect-square object-cover grayscale-[0.5] hover:grayscale-0 transition-all duration-500" data-alt="Extreme close-up of vintage computer circuit boards with intricate gold traces and warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7tzNZMl8j5uXxJ9DF8LOJbnExHhf6pxR04yZ8-AU3QnnJYRoaFfpp24gbTjdWIa32mbj2g_K9pgpTtskSpBBPRymk6QbbsJAPc7VGjmBpwZZEYFKcgjWQesp7zdDiW3HRSRioB_Whf_zG1nlMuNlXqWcts7lAGmwS9GQtq2gYhT7-P7IjPkGiHgWz-QNcHw4FeGvcR3Dkz76NbcNNRgLSfFBS5vvLejsoTIGZZGUWlkBA9s87s5nasyH4_yUnwOxZh78Pn5VCHGri"/>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-headline font-bold uppercase tracking-widest text-[10px] text-on-primary-container">Tech</span>
+<span class="font-headline text-[10px] text-on-surface-variant tracking-widest">5 MIN READ</span>
+</div>
+<h4 class="font-headline font-bold text-2xl text-primary tracking-tight leading-tight">
+                        Silicon Souls: Can We Archive Human Consciousness?
+                    </h4>
+<p class="font-body text-on-surface-variant leading-relaxed line-clamp-3">
+                        Exploring the philosophical boundaries between data storage and identity in the era of large language models and neural mapping.
+                    </p>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="flex flex-col gap-6">
+<div class="overflow-hidden">
+<img class="w-full aspect-square object-cover grayscale-[0.5] hover:grayscale-0 transition-all duration-500" data-alt="Minimalist photograph of a lone basketball hoop in a foggy, muted urban playground at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLdzKtAYunFSyiv8V2h64yVxriio6JB2IPbDYwmd3FNaJJyghcF0rpjraprEuVWchj5FzL7PXJdkI1XzUcA8M9yjmxiZbDZ86xYFxzyJCtLSSChZ_La5szYs8UjT_pofHw5ltRk6HNDHf6_4QICkFfltd_fNbuW7O5kO8-_0MIOORaw0bT8BWT5P1-xmGK8wnVA7f1aQtb_Pd74VCvnAPElW0xt3wSINpN_0K3zwlnmf6QJd10Mz2A1R7vBHqIdzNWDkOZDZdYCxSA"/>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-headline font-bold uppercase tracking-widest text-[10px] text-on-primary-container">Sports</span>
+<span class="font-headline text-[10px] text-on-surface-variant tracking-widest">8 MIN READ</span>
+</div>
+<h4 class="font-headline font-bold text-2xl text-primary tracking-tight leading-tight">
+                        The Quiet Aesthetic of Modern Athletics
+                    </h4>
+<p class="font-body text-on-surface-variant leading-relaxed line-clamp-3">
+                        Beyond the stadium roar, a new generation of athletes is finding focus through minimalism and the science of silent performance.
+                    </p>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="flex flex-col gap-6">
+<div class="overflow-hidden">
+<img class="w-full aspect-square object-cover grayscale-[0.5] hover:grayscale-0 transition-all duration-500" data-alt="Vibrant abstract oil painting with thick brushstrokes of deep red and obsidian black with gold leaf accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsX4iPnfOUQoCnOALAmDrAsD-5Aw4oLoUxrKC_A-gn5-wREcNpKPxMnR2HjpGOGfJZYiC7l6ciIPB4ryTpNhf3HXLN8IalZrZGXWf4MvisOF4AM2JtG2wb9Vum9UNIqpR1AG02DZ439D_y1g6QQv7-NT6wQSZSn6XD4r0sW3oQXhQ3GSOulkWRsgFG1xxILn_NmHAeakNSybYzJ54FkZwNl8OKhBWRYm4jRxTc4FaBu4r2i8DPislmW1XUTaKqGdKFcjY2yS3ZO8Fv"/>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-headline font-bold uppercase tracking-widest text-[10px] text-on-primary-container">Culture</span>
+<span class="font-headline text-[10px] text-on-surface-variant tracking-widest">12 MIN READ</span>
+</div>
+<h4 class="font-headline font-bold text-2xl text-primary tracking-tight leading-tight">
+                        The Return of the Physical Canvas
+                    </h4>
+<p class="font-body text-on-surface-variant leading-relaxed line-clamp-3">
+                        In an increasingly digital world, artists are returning to the tactile, the messy, and the irreversible nature of pigment.
+                    </p>
+</div>
+</article>
+</section>
+<!-- Newsletter Tonal Block (Surface container low instead of border) -->
+<section class="mt-32 bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline font-black text-4xl md:text-6xl text-primary tracking-tighter leading-none mb-6">
+                        Join the <br/>Atelier.
+                    </h2>
+<p class="font-body text-xl text-on-surface-variant leading-relaxed">
+                        Weekly dispatches on the intersection of design, technology, and the human condition. Delivered to your digital doorstep.
+                    </p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="relative group">
+<input class="w-full bg-transparent border-none border-b-2 border-outline focus:border-primary focus:ring-0 py-4 font-headline text-lg outline-none transition-colors" placeholder="Your email address" type="email"/>
+</div>
+<button class="w-fit px-12 py-4 bg-primary text-on-primary font-headline font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-all">
+                        Subscribe
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full bg-[#f4f3f7] dark:bg-slate-950 no-border tonal-shift">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center">
+<div class="mb-8 md:mb-0">
+<h3 class="font-['Work_Sans'] font-black text-[#002147] text-2xl tracking-tighter">The Digital Atelier</h3>
+<p class="font-['Newsreader'] italic text-lg text-[#44474e] dark:text-slate-500 mt-2">© 2024 The Digital Atelier. All rights reserved.</p>
+</div>
+<div class="flex gap-8 items-center opacity-80 hover:opacity-100 transition-opacity">
+<a class="text-[#44474e] dark:text-slate-500 font-['Newsreader'] italic text-lg hover:text-[#002147] dark:hover:text-slate-200 transition-colors" href="#">About</a>
+<a class="text-[#44474e] dark:text-slate-500 font-['Newsreader'] italic text-lg hover:text-[#002147] dark:hover:text-slate-200 transition-colors" href="#">Privacy</a>
+<a class="text-[#44474e] dark:text-slate-500 font-['Newsreader'] italic text-lg hover:text-[#002147] dark:hover:text-slate-200 transition-colors" href="#">Archive</a>
+<a class="text-[#44474e] dark:text-slate-500 font-['Newsreader'] italic text-lg underline decoration-1 text-[#002147] dark:text-slate-100 font-bold" href="#">Subscribe</a>
+</div>
+</div>
+</footer>
+</body></html>
