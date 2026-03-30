@@ -1,67 +1,15 @@
 <?php
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/functions.php';
 
-function escape(string $value): string
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-}
-
-function formatArticleDate(string $date): string
-{
-    try {
-        $dateTime = new DateTime($date);
-        if (class_exists('IntlDateFormatter')) {
-            $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-            $formatted = $formatter->format($dateTime);
-            if ($formatted !== false) {
-                return $formatted;
-            }
-        }
-
-        return $dateTime->format('d/m/Y');
-    } catch (Exception $e) {
-        return $date;
-    }
-}
-
-function buildArticleBody(string $content): string
-{
-    $content = trim($content);
-    if ($content === '') {
-        return '<p>Contenu indisponible.</p>';
-    }
-
-    $containsHtml = $content !== strip_tags($content);
-    if ($containsHtml) {
-        // Keep editorial tags from the backoffice editor while removing unsafe elements.
-        $allowedTags = '<p><h1><h2><h3><h4><h5><h6><blockquote><ul><ol><li><strong><em><b><i><a><img><br>';
-        $sanitized = strip_tags($content, $allowedTags);
-        return $sanitized;
-    }
-
-    $paragraphs = preg_split('/\R{2,}/', $content) ?: [];
-    $html = [];
-    foreach ($paragraphs as $paragraph) {
-        $paragraph = trim($paragraph);
-        if ($paragraph === '') {
-            continue;
-        }
-        $html[] = '<p>' . nl2br(escape($paragraph)) . '</p>';
-    }
-
-    return !empty($html) ? implode("\n", $html) : '<p>' . nl2br(escape($content)) . '</p>';
-}
-
-$articleId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-if (!$articleId || $articleId < 1) {
+$articleSlug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_STRING);
+if (!$articleSlug || !preg_match('/^[a-z0-9-]+$/', $articleSlug)) {
     http_response_code(400);
     echo 'Identifiant d\'article invalide.';
     exit;
 }
 
-$stmt = $pdo->prepare('SELECT id, titre, slug, contenu, image_url, image_alt, meta_description, date_creation FROM articles WHERE id = ? LIMIT 1');
-$stmt->execute([$articleId]);
-$article = $stmt->fetch();
+$article = getBySlug($pdo, $articleSlug);
 
 if (!$article) {
     http_response_code(404);
@@ -82,15 +30,9 @@ $heroAlt = trim((string) $article['image_alt']) !== ''
 $articleHtml = buildArticleBody((string) $article['contenu']);
 $publishedAt = formatArticleDate((string) $article['date_creation']);
 
-$requestPath = (string) (parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/');
-$basePath = '';
-if (preg_match('#^(.*)/articles/[0-9]+/?$#', $requestPath, $matches)) {
-    $basePath = $matches[1];
-} elseif (preg_match('#^(.*)/[^/]+/?$#', $requestPath, $matches)) {
-    $basePath = $matches[1];
-}
-$basePath = rtrim($basePath, '/');
-$preferredSlugPath = ($basePath !== '' ? $basePath : '') . '/' . ltrim((string) $article['slug'], '/');
+$protocol = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$canonicalUrl = $protocol . '://' . $host . '/site-information/articles/' . $article['slug'];
 ?>
 <!DOCTYPE html>
 <html class="light" lang="fr">
@@ -99,8 +41,16 @@ $preferredSlugPath = ($basePath !== '' ? $basePath : '') . '/' . ltrim((string) 
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title><?= escape($title) ?> | Site d'informations</title>
     <meta name="description" content="<?= escape($metaDescription) ?>"/>
-    <link rel="canonical" href="<?= escape($preferredSlugPath) ?>"/>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+    <meta property="og:title" content="<?= escape($title) ?>"/>
+    <meta property="og:description" content="<?= escape($metaDescription) ?>"/>
+    <meta property="og:image" content="<?= escape($heroImage) ?>"/>
+    <meta property="og:type" content="article"/>
+    <meta property="article:published_time" content="<?= date('c', strtotime($article['date_creation'])) ?>"/>
+    <link rel="canonical" href="<?= $canonicalUrl ?>"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"/>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -170,21 +120,12 @@ $preferredSlugPath = ($basePath !== '' ? $basePath : '') . '/' . ltrim((string) 
             text-decoration: underline;
         }
     </style>
-    <script>
-        (function () {
-            var preferredSlugPath = <?= json_encode($preferredSlugPath, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
-            if (!preferredSlugPath || preferredSlugPath === window.location.pathname) {
-                return;
-            }
-            window.history.replaceState({}, '', preferredSlugPath + window.location.search + window.location.hash);
-        })();
-    </script>
 </head>
 <body class="bg-surface text-onSurface font-body selection:bg-blue-100">
 <header class="border-b border-line bg-white/90 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
         <a class="text-2xl md:text-3xl font-black tracking-tight text-primary font-headline" href="/">Info Iran</a>
-        <a class="text-sm font-semibold text-primary border border-primary px-3 py-1.5 hover:bg-primary hover:text-white transition-colors" href="/backoffice/login.php">Backoffice</a>
+        <a class="text-sm font-semibold text-primary border border-primary px-3 py-1.5 hover:bg-primary hover:text-white transition-colors" href="/site-information/backoffice/login.php">Backoffice</a>
     </div>
 </header>
 
@@ -203,7 +144,13 @@ $preferredSlugPath = ($basePath !== '' ? $basePath : '') . '/' . ltrim((string) 
 
     <section class="max-w-5xl mx-auto mb-12">
         <div class="aspect-[16/9] overflow-hidden rounded-md bg-gray-100">
-            <img class="w-full h-full object-cover" src="<?= escape($heroImage) ?>" alt="<?= escape($heroAlt) ?>" loading="eager"/>
+            <img class="w-full h-full object-cover" 
+                 src="<?= escape($heroImage) ?>" 
+                 alt="<?= escape($heroAlt) ?>" 
+                 width="1600" 
+                 height="900"
+                 loading="eager"
+                 decoding="async"/>
         </div>
     </section>
 
