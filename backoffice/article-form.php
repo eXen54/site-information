@@ -8,6 +8,12 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit;
 }
 
+$admin_user_id = (int) ($_SESSION['admin_user_id'] ?? 0);
+if (!$admin_user_id) {
+    header('Location: login.php');
+    exit;
+}
+
 $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 $error = '';
 $article = [
@@ -149,7 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             contenu = :contenu, 
                             image_url = :image_url, 
                             image_alt = :image_alt, 
-                            meta_description = :meta_description
+                            meta_description = :meta_description,
+                            published_by = :published_by
                         WHERE id = :id";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
@@ -159,12 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':image_url' => $image_url_to_save,
                     ':image_alt' => $image_alt,
                     ':meta_description' => $meta_description,
+                    ':published_by' => $admin_user_id,
                     ':id' => $id
                 ]);
             } else {
                 // INSERT
-                $sql = "INSERT INTO articles (titre, slug, contenu, image_url, image_alt, meta_description) 
-                        VALUES (:titre, :slug, :contenu, :image_url, :image_alt, :meta_description)";
+                $sql = "INSERT INTO articles (titre, slug, contenu, image_url, image_alt, meta_description, published_by) 
+                        VALUES (:titre, :slug, :contenu, :image_url, :image_alt, :meta_description, :published_by)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
                     ':titre' => $titre,
@@ -172,7 +180,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':contenu' => $contenu,
                     ':image_url' => $image_url_to_save,
                     ':image_alt' => $image_alt,
-                    ':meta_description' => $meta_description
+                    ':meta_description' => $meta_description,
+                    ':published_by' => $admin_user_id
                 ]);
             }
             

@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pour améliorer ça plus tard, on pourrait utiliser password_hash() et password_verify()
     if ($user && $password === $user['password']) {
         $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_user_id'] = (int) $user['id'];
         $_SESSION['admin_username'] = $user['username'];
         header('Location: articles.php'); // Redirection vers la gestion des articles
         exit;
