@@ -1,6 +1,6 @@
 RewriteEngine On
 # Doit correspondre a APP_BASE_PATH dans includes/app-config.php
-RewriteBase /site-information/
+RewriteBase /
 
 # Preserve existing files and folders.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -12,6 +12,52 @@ RewriteRule ^guerre-iran-actualites/?$ frontoffice/articles-list.php [L,QSA,NC]
 
 # Article detail page: articles/[slug] where slug is a-z, 0-9, hyphens.
 RewriteRule ^articles/([a-z0-9-]+)/?$ frontoffice/detail-article.php?slug=$1 [L,QSA,NC]
+
+# --- OPTIMISATION DES PERFORMANCES (Lighthouse) ---
+
+# 1. Activation de la compression GZIP (mod_deflate)
+<IfModule mod_deflate.c>
+    # Compression HTML, CSS, JavaScript, Text, XML, etc.
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE font/opentype
+</IfModule>
+
+# 2. Mise en cache du navigateur (mod_expires)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images et médias (1 an)
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # CSS et JavaScript (1 mois)
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    
+    # Polices (1 an)
+    ExpiresByType application/x-font-woff "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    
+    # HTML et autres (pas de cache pour garder le dynamisme)
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
 
 
 

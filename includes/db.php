@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; 
+$host = 'db'; 
 $dbname = 'info_iran';
-$user = 'root';
-$pass = '';
+$user = 'neks';
+$pass = 'neks';
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -15,7 +15,7 @@ $pdo = null;
 
 do {
     try {
-        $pdo = new PDO("mysql:host=$host;port=3400;dbname=$dbname;charset=utf8", $user, $pass, $options);
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass, $options);
     } catch (PDOException $e) {
         $attempt++;
         if ($attempt >= $max_attempts) {

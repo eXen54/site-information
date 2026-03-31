@@ -47,8 +47,10 @@ $canonicalUrl = $protocol . '://' . $host . withBasePath('articles/' . $article[
     <meta property="og:type" content="article"/>
     <meta property="article:published_time" content="<?= date('c', strtotime($article['date_creation'])) ?>"/>
     <link rel="canonical" href="<?= $canonicalUrl ?>"/>
+    <link rel="preload" as="image" href="<?= escape($heroImage) ?>" fetchpriority="high"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com"/>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"/>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>

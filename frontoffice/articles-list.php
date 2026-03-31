@@ -23,6 +23,12 @@ $listUrl = $protocol . '://' . $host . withBasePath('guerre-iran-actualites', $b
     <meta name="description" content="Guerre Iran actualites: suivez les dernieres analyses, le contexte geopolitique et les impacts humanitaires en temps reel."/>
     <meta name="keywords" content="guerre iran actualites, conflit iran, actualites moyen orient, analyse geopolitique iran"/>
     <link rel="canonical" href="<?= escape($listUrl) ?>"/>
+    <?php if ($featured): ?>
+    <link rel="preload" as="image" href="<?= escape(resolveImageUrl($featured['image_url'], $basePath)) ?>" fetchpriority="high"/>
+    <?php endif; ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com"/>
     <meta property="og:title" content="Guerre Iran Actualites | Dossiers Et Analyses"/>
     <meta property="og:description" content="Suivez la guerre en Iran avec des actualites verifiees, des analyses et des dossiers de fond."/>
     <meta property="og:type" content="website"/>
@@ -105,7 +111,9 @@ $listUrl = $protocol . '://' . $host . withBasePath('guerre-iran-actualites', $b
             <div class="overflow-hidden rounded-t-md md:rounded-t-lg">
                 <img class="w-full aspect-[16/9] object-cover hover:scale-105 transition-transform duration-500"
                      src="<?= escape(resolveImageUrl($featured['image_url'], $basePath)) ?>"
-                     alt="<?= escape($featured['image_alt'] ?? 'Article') ?>" loading="lazy"/>
+                     alt="<?= escape($featured['image_alt'] ?? 'Article') ?>" 
+                     width="1600" height="900" 
+                     fetchpriority="high" loading="eager" decoding="async"/>
             </div>
             <div class="bg-white p-8 md:p-10 shadow-xl shadow-primary/10 rounded-b-md md:rounded-b-lg border border-t-0 border-line/60">
                 <div class="flex items-center gap-3 mb-4">
@@ -136,8 +144,10 @@ $listUrl = $protocol . '://' . $host . withBasePath('guerre-iran-actualites', $b
                 <article class="flex flex-col gap-6 group">
                     <div class="overflow-hidden rounded-md">
                         <img class="w-full aspect-square object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500" 
-                                src="<?= escape(resolveImageUrl($article['image_url'], $basePath)) ?>" 
-                             alt="<?= escape($article['image_alt'] ?? 'Article') ?>" loading="lazy"/>
+                             src="<?= escape(resolveImageUrl($article['image_url'], $basePath)) ?>" 
+                             alt="<?= escape($article['image_alt'] ?? 'Article') ?>" 
+                             width="600" height="600" 
+                             loading="lazy" decoding="async"/>
                     </div>
                     <div class="flex flex-col gap-4">
                         <div class="flex justify-between items-center">
