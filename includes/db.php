@@ -15,7 +15,7 @@ $pdo = null;
 
 do {
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass, $options);
+        $pdo = new PDO("mysql:host=$host;port=3400;dbname=$dbname;charset=utf8", $user, $pass, $options);
     } catch (PDOException $e) {
         $attempt++;
         if ($attempt >= $max_attempts) {
