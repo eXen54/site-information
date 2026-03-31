@@ -1,5 +1,6 @@
 RewriteEngine On
-RewriteBase /
+# Doit correspondre a APP_BASE_PATH dans includes/app-config.php
+RewriteBase /site-information/
 
 # Preserve existing files and folders.
 RewriteCond %{REQUEST_FILENAME} -f [OR]

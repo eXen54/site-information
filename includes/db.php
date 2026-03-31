@@ -1,8 +1,8 @@
 <?php
-$host = 'db'; // Utiliser le nom du service Docker au lieu de 'localhost'
+$host = 'localhost'; 
 $dbname = 'info_iran';
-$user = 'neks';
-$pass = 'neks'; // Mot de passe défini dans docker-compose.yml
+$user = 'root';
+$pass = '';
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -15,7 +15,7 @@ $pdo = null;
 
 do {
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass, $options);
+        $pdo = new PDO("mysql:host=$host;port=3400;dbname=$dbname;charset=utf8", $user, $pass, $options);
     } catch (PDOException $e) {
         $attempt++;
         if ($attempt >= $max_attempts) {

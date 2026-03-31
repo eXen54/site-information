@@ -9,16 +9,10 @@ $articles = $stmt->fetchAll();
 
 $featured = !empty($articles) ? array_shift($articles) : null;
 
-// Helper function to resolve image urls
-function resolveImageUrl($url) {
-    if (empty(trim((string)$url))) return 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80';
-    return (strpos($url, 'http') === 0) ? $url : '/' . ltrim($url, '/');
-}
-
 $protocol = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$listSlug = '';
-$listUrl = $protocol . '://' . $host . '/';
+$basePath = getBasePath();
+$listUrl = $protocol . '://' . $host . withBasePath('guerre-iran-actualites', $basePath);
 ?>
 <!DOCTYPE html>
 <html class="light" lang="fr">
@@ -77,11 +71,11 @@ $listUrl = $protocol . '://' . $host . '/';
 <!-- Header -->
 <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-line">
     <div class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-        <a class="text-2xl md:text-3xl font-black tracking-tighter text-primary font-headline" href="/">Info Iran</a>
+        <a class="text-2xl md:text-3xl font-black tracking-tighter text-primary font-headline" href="<?= escape(withBasePath('guerre-iran-actualites', $basePath)) ?>">Info Iran</a>
         <nav class="hidden md:flex gap-8">
-            <a class="text-sm font-semibold text-primary hover:text-muted transition-colors" href="/">Actualités</a>
+            <a class="text-sm font-semibold text-primary hover:text-muted transition-colors" href="<?= escape(withBasePath('guerre-iran-actualites', $basePath)) ?>">Actualités</a>
         </nav>
-        <a class="text-sm font-semibold text-white bg-primary px-4 py-2 rounded shadow-sm hover:bg-opacity-90 transition-colors" href="/backoffice/login.php">Connexion</a>
+        <a class="text-sm font-semibold text-white bg-primary px-4 py-2 rounded shadow-sm hover:bg-opacity-90 transition-colors" href="<?= escape(withBasePath('backoffice/login.php', $basePath)) ?>">Connexion</a>
     </div>
 </header>
 
@@ -110,7 +104,7 @@ $listUrl = $protocol . '://' . $host . '/';
         <div class="group">
             <div class="overflow-hidden rounded-t-md md:rounded-t-lg">
                 <img class="w-full aspect-[16/9] object-cover hover:scale-105 transition-transform duration-500"
-                     src="<?= escape(resolveImageUrl($featured['image_url'])) ?>"
+                     src="<?= escape(resolveImageUrl($featured['image_url'], $basePath)) ?>"
                      alt="<?= escape($featured['image_alt'] ?? 'Article') ?>" loading="lazy"/>
             </div>
             <div class="bg-white p-8 md:p-10 shadow-xl shadow-primary/10 rounded-b-md md:rounded-b-lg border border-t-0 border-line/60">
@@ -124,7 +118,7 @@ $listUrl = $protocol . '://' . $host . '/';
                 <p class="font-body text-muted leading-relaxed mb-6">
                     <?= escape(getShortenedExcerpt($featured['contenu'], 180)) ?>
                 </p>
-                <a class="inline-flex items-center gap-2 group/link" href="/articles/<?= escape($featured['slug']) ?>">
+                <a class="inline-flex items-center gap-2 group/link" href="<?= escape(withBasePath('articles/' . $featured['slug'], $basePath)) ?>">
                     <span class="font-headline font-bold text-sm uppercase tracking-widest text-primary">Lire l'article</span>
                     <span class="material-symbols-outlined text-primary group-hover/link:translate-x-1 transition-transform text-sm">arrow_right_alt</span>
                 </a>
@@ -142,7 +136,7 @@ $listUrl = $protocol . '://' . $host . '/';
                 <article class="flex flex-col gap-6 group">
                     <div class="overflow-hidden rounded-md">
                         <img class="w-full aspect-square object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500" 
-                             src="<?= escape(resolveImageUrl($article['image_url'])) ?>" 
+                                src="<?= escape(resolveImageUrl($article['image_url'], $basePath)) ?>" 
                              alt="<?= escape($article['image_alt'] ?? 'Article') ?>" loading="lazy"/>
                     </div>
                     <div class="flex flex-col gap-4">
@@ -158,7 +152,7 @@ $listUrl = $protocol . '://' . $host . '/';
                         <p class="font-body text-muted leading-relaxed line-clamp-3">
                             <?= escape(getShortenedExcerpt($article['contenu'], 130)) ?>
                         </p>
-                        <a class="inline-flex items-center gap-2 group/link mt-auto" href="/articles/<?= escape($article['slug']) ?>">
+                        <a class="inline-flex items-center gap-2 group/link mt-auto" href="<?= escape(withBasePath('articles/' . $article['slug'], $basePath)) ?>">
                             <span class="font-headline font-bold text-xs uppercase tracking-widest text-primary">Lire</span>
                             <span class="material-symbols-outlined text-primary group-hover/link:translate-x-1 transition-transform text-xs">arrow_right_alt</span>
                         </a>
@@ -184,7 +178,7 @@ $listUrl = $protocol . '://' . $host . '/';
         <nav class="flex gap-8 items-center">
             <a class="text-muted font-body hover:text-primary transition-colors text-sm" href="#about">À propos</a>
             <a class="text-muted font-body hover:text-primary transition-colors text-sm" href="#privacy">Confidentialité</a>
-            <a class="text-muted font-body hover:text-primary transition-colors text-sm" href="/">Actualités</a>
+            <a class="text-muted font-body hover:text-primary transition-colors text-sm" href="<?= escape(withBasePath('guerre-iran-actualites', $basePath)) ?>">Actualités</a>
         </nav>
     </div>
 </footer>

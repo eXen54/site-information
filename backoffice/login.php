@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once '../includes/db.php';
+require_once '../includes/functions.php';
+
+$basePath = getBasePath();
 
 $error = '';
 
@@ -137,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     
     <div style="text-align: center; margin-top: 20px;">
-        <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;">&larr; Retour au site</a>
+        <a href="<?= escape(withBasePath('guerre-iran-actualites', $basePath)) ?>" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;">&larr; Retour au site</a>
     </div>
 </div>
 

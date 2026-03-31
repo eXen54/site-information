@@ -18,22 +18,21 @@ if (!$article) {
 }
 
 $title = $article['titre'];
+$basePath = getBasePath();
 $metaDescription = trim((string) $article['meta_description']) !== ''
     ? $article['meta_description']
     : mb_substr(trim(strip_tags((string) $article['contenu'])), 0, 155);
-$heroImage = 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80';
-if (trim((string) $article['image_url']) !== '') {
-    $heroImage = strpos($article['image_url'], 'http') === 0 ? $article['image_url'] : '/' . ltrim($article['image_url'], '/');
-}
+$heroImage = resolveImageUrl((string) ($article['image_url'] ?? ''), $basePath);
 $heroAlt = trim((string) $article['image_alt']) !== ''
     ? $article['image_alt']
     : 'Illustration de l\'article';
+$contentHasH1 = preg_match('/<h1\b[^>]*>/i', (string) $article['contenu']) === 1;
 $articleHtml = buildArticleBody((string) $article['contenu']);
 $publishedAt = formatArticleDate((string) $article['date_creation']);
 
 $protocol = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$canonicalUrl = $protocol . '://' . $host . '/articles/' . $article['slug'];
+$canonicalUrl = $protocol . '://' . $host . withBasePath('articles/' . $article['slug'], $basePath);
 ?>
 <!DOCTYPE html>
 <html class="light" lang="fr">
@@ -125,8 +124,8 @@ $canonicalUrl = $protocol . '://' . $host . '/articles/' . $article['slug'];
 <body class="bg-surface text-onSurface font-body selection:bg-blue-100">
 <header class="border-b border-line bg-white/90 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-        <a class="text-2xl md:text-3xl font-black tracking-tight text-primary font-headline" href="/">Info Iran</a>
-        <a class="text-sm font-semibold text-white bg-primary px-4 py-2 rounded shadow-sm hover:bg-opacity-90 transition-colors" href="/backoffice/login.php">Connexion</a>
+        <a class="text-2xl md:text-3xl font-black tracking-tight text-primary font-headline" href="<?= escape(withBasePath('guerre-iran-actualites', $basePath)) ?>">Info Iran</a>
+        <a class="text-sm font-semibold text-white bg-primary px-4 py-2 rounded shadow-sm hover:bg-opacity-90 transition-colors" href="<?= escape(withBasePath('backoffice/login.php', $basePath)) ?>">Connexion</a>
     </div>
 </header>
 
@@ -135,12 +134,14 @@ $canonicalUrl = $protocol . '://' . $host . '/articles/' . $article['slug'];
         <div class="text-xs uppercase tracking-[0.2em] text-muted font-semibold mb-3">
             Article #<?= (int) $article['id'] ?> • <?= escape($publishedAt) ?>
         </div>
-        <h1 class="font-headline font-black text-4xl md:text-6xl leading-tight tracking-tight text-primary mb-6">
-            <?= escape($title) ?>
-        </h1>
-        <p class="text-sm text-muted">
-            URL lisible: /<?= escape($article['slug']) ?>
-        </p>
+        <?php if (!$contentHasH1): ?>
+            <h1 class="font-headline font-black text-4xl md:text-6xl leading-tight tracking-tight text-primary mb-6">
+                <?= escape($title) ?>
+            </h1>
+        <?php endif; ?>
+        <!-- <p class="text-sm text-muted">
+            URL lisible: <?= escape(withBasePath('articles/' . $article['slug'], $basePath)) ?>
+        </p> -->
     </header>
 
     <section class="max-w-5xl mx-auto mb-12">

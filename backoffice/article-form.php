@@ -19,6 +19,41 @@ $article = [
     'meta_description' => ''
 ];
 
+function getLocalUploadFilepath(string $imageUrl): ?string
+{
+    if ($imageUrl === '' || strpos($imageUrl, 'http') === 0) {
+        return null;
+    }
+
+    $path = parse_url($imageUrl, PHP_URL_PATH) ?: $imageUrl;
+    $path = str_replace('\\', '/', $path);
+
+    if (preg_match('#(?:^|/)uploads/([^/]+)$#', $path, $matches)) {
+        return __DIR__ . '/../uploads/' . $matches[1];
+    }
+
+    return null;
+}
+
+function resolveBackofficePreviewUrl(string $imageUrl): string
+{
+    if ($imageUrl === '') {
+        return '';
+    }
+    if (strpos($imageUrl, 'http') === 0) {
+        return $imageUrl;
+    }
+
+    $path = parse_url($imageUrl, PHP_URL_PATH) ?: $imageUrl;
+    $path = str_replace('\\', '/', $path);
+
+    if (preg_match('#(?:^|/)uploads/([^/]+)$#', $path, $matches)) {
+        return '../uploads/' . $matches[1];
+    }
+
+    return '../' . ltrim($imageUrl, '/');
+}
+
 // Si un ID est fourni, récupérer l'article existant
 if ($id) {
     try {
@@ -82,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     // Si modification et ancienne image locale existe, on la supprime
                     if ($id && !empty($article['image_url']) && strpos($article['image_url'], 'http') !== 0) {
-                        $old_filepath = '../' . ltrim($article['image_url'], '/');
-                        if (file_exists($old_filepath)) {
+                        $old_filepath = getLocalUploadFilepath((string) $article['image_url']);
+                        if ($old_filepath !== null && file_exists($old_filepath)) {
                             unlink($old_filepath);
                         }
                     }
@@ -170,8 +205,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         selector: '#contenu',
         menubar: false,
         plugins: 'lists link code',
-        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | blockquote | code',
-        block_formats: 'Paragraph=p; Heading 2=h2; Heading 3=h3'
+                toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | blockquote | code',
+                block_formats: 'Paragraphe=p; Titre 1=h1; Titre 2=h2; Titre 3=h3; Titre 4=h4; Titre 5=h5; Titre 6=h6'
       });
     </script>
     <style>
@@ -317,7 +352,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="file" id="image_file" name="image_file" accept=".jpg,.jpeg,.png,.webp">
             <?php if (!empty($article['image_url'])): ?>
                 <div class="info">Image actuelle : <?= htmlspecialchars($article['image_url']) ?></div>
-                <img src="../<?= htmlspecialchars($article['image_url']) ?>" alt="Aperçu">
+                <img src="<?= htmlspecialchars(resolveBackofficePreviewUrl((string) $article['image_url'])) ?>" alt="Aperçu">
             <?php endif; ?>
         </div>
 
